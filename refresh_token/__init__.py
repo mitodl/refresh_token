@@ -1,16 +1,21 @@
-__version__ = "0.0.3"
+"""Plugin for generating refresh tokens on reddit"""
 
 from r2.lib.plugin import Plugin
-from r2.lib.configparse import ConfigValue
-from r2.lib.js import Module
-from r2.config.routing import not_in_sr
+
+
+__version__ = "0.0.3"
 
 
 class RefreshToken(Plugin):
+    """Plugin for generating refresh tokens on reddit"""
     needs_static_build = False
 
     def add_routes(self, mc):
+        """Add the refresh token endpoint to the list of reddit endpoints"""
         mc('/api/v1/generate_refresh_token', controller='refreshtoken', action='refresh_token')
 
     def load_controllers(self):
-        from refresh_token.controller import RefreshTokenController
+        """
+        Add the controller referenced by the route. reddit uses locals() to get these values
+        """
+        from refresh_token.controller import RefreshTokenController  # pylint: disable=unused-variable

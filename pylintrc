@@ -1,0 +1,16 @@
+[MASTER]
+ignore=.git
+
+[BASIC]
+const-rgx = (([A-Z_][A-Z0-9_]*)|(__.*__)|log)$
+
+[TYPECHECK]
+ignored-classes=
+	six,
+	six.moves,
+ignored-modules=
+	six,
+	six.moves,
+
+[MESSAGES CONTROL]
+disable=line-too-long, protected-access, import-error, invalid-name, too-few-public-methods, no-self-use

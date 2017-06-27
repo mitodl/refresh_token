@@ -1,0 +1,5 @@
+pylint
+pytest
+pytest-pep8
+pytest-pylint
+tox

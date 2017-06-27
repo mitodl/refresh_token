@@ -1,9 +1,8 @@
+"""Defines the controller for generating refresh tokens"""
 import json
-import os
 from uuid import uuid4
 
 from pylons import app_globals as g
-from pylons import tmpl_context as c
 from pylons import request
 
 from r2.controllers import add_controller
@@ -15,13 +14,18 @@ from r2.models.account import (
     register,
 )
 from r2.models.token import (
-    OAuth2Client, OAuth2AuthorizationCode, OAuth2AccessToken,
-    OAuth2RefreshToken, OAuth2Scope)
+    OAuth2Client,
+    OAuth2AccessToken,
+    OAuth2RefreshToken,
+    OAuth2Scope,
+)
 
 
 @add_controller
 class RefreshTokenController(MinimalController):
-    def GET_refresh_token(self, *args):
+    """The controller for generating refresh tokens"""
+    def GET_refresh_token(self, *args, **kwargs):  # pylint: disable=unused-argument
+        """Generate a refresh token given a username"""
         username = request.GET['username']
         try:
             account = Account._by_name(username)

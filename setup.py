@@ -1,3 +1,4 @@
+"""Package for generating refresh tokens for reddit"""
 from __future__ import unicode_literals
 from setuptools import setup, find_packages
 
