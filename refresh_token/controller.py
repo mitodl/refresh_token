@@ -13,6 +13,7 @@ from r2.models.account import (
     Account,
     register,
 )
+from r2.models.subreddit import Subreddit
 from r2.models.token import (
     OAuth2Client,
     OAuth2AccessToken,
@@ -31,6 +32,13 @@ class RefreshTokenController(MinimalController):
             account = Account._by_name(username)
         except NotFound:
             account = register(username, uuid4().hex, '127.0.0.1')
+
+        # this does the same thing that Subreddit.subscribe_default()
+        # should be doing, but doesn't for reasons we didn't want to investigate
+        if not account.has_subscribed:
+            Subreddit.subscribe_multiple(account, Subreddit._by_name(g.automatic_reddits).values())
+            account.has_subscribed = True
+            account._commit()
 
         client_id = g.secrets['generate_refresh_token_client_id']
         client = OAuth2Client.get_token(client_id)
