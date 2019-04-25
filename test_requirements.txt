@@ -1,5 +1,5 @@
 pylint
-pytest
-pytest-pep8
+pytest==3.2.0
+pytest-pep8==1.0.6
 pytest-pylint
 tox

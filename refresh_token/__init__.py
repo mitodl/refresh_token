@@ -3,7 +3,7 @@
 from r2.lib.plugin import Plugin
 
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 
 
 class RefreshToken(Plugin):

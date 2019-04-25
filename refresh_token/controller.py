@@ -33,10 +33,10 @@ class RefreshTokenController(MinimalController):
         except NotFound:
             account = register(username, uuid4().hex, '127.0.0.1')
 
-        # this does the same thing that Subreddit.subscribe_default()
-        # should be doing, but doesn't for reasons we didn't want to investigate
+        # subscribe the user now because reddit does not have consistency across
+        # its APIs on what it considers the user to be subscribed to
         if not account.has_subscribed:
-            Subreddit.subscribe_multiple(account, Subreddit._by_name(g.automatic_reddits).values())
+            Subreddit.subscribe_defaults(account)
             account.has_subscribed = True
             account._commit()
 
